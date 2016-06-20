@@ -1,0 +1,6 @@
+server:
+  applicationConnectors:
+  - type: http 
+    port: ${FAKESMTP_HTTP_PORT:-80}
+
+smtpPort: ${FAKESMTP_SMTP_PORT:-25}

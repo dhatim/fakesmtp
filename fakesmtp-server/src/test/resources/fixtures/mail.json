@@ -1,0 +1,7 @@
+{
+    "headers": {
+        "header1": ["value1"],
+        "header2": ["value1", "value2"]
+    },
+    "body": "This is a test"
+}
