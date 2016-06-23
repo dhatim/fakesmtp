@@ -99,7 +99,7 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.15.0</version>
+                <version>0.15.7</version>
                 <executions>
                     <execution>
                         <id>docker-build</id>
@@ -134,13 +134,17 @@
                     <showLogs>true</showLogs>
                     <images>
                         <image>
-                            <name>docker.dhatim.it/fakesmtp</name>
+                            <name>dhatim/fakesmtp</name>
                             <alias>server</alias>
                             <build>
                                 <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
                                 <assembly>
                                     <descriptor>${project.basedir}/src/main/docker/assembly.xml</descriptor>
                                 </assembly>
+                                <tags>
+                                    <tag>latest</tag>
+                                    <tag>${project.version}</tag>
+                                </tags>
                             </build>
                             <run>
                                 <ports>
@@ -149,7 +153,6 @@
                                     <port>fakesmtp.admin.port:8081</port>
                                 </ports>
                                 <env>
-
                                 </env>
                                 <wait>
                                     <http>
@@ -186,4 +189,32 @@
             </plugin>
         </plugins>
     </build>
+    
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>0.15.7</version>
+                        <executions>
+                            <execution>
+                                <id>docker-push</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>push</goal>
+                                </goals>
+                                <configuration>
+                                    <image>server</image>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles> 
+    
 </project>
