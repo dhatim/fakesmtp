@@ -3,7 +3,7 @@
     <groupId>org.dhatim</groupId>
     <artifactId>fakesmtp</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>fakesmtp</name>
     <url>https://github.com/dhatim/fakesmtp</url>
     <description>Fake smtp server and client to use in integration tests</description>
@@ -69,7 +69,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <dropwizard.version>0.9.2</dropwizard.version>
+        <dropwizard.version>1.0.0-rc3</dropwizard.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
@@ -115,17 +115,17 @@
             <dependency>
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-client</artifactId>
-                <version>2.22.2</version>
+                <version>2.23.1</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.media</groupId>
                 <artifactId>jersey-media-json-jackson</artifactId>
-                <version>2.22.2</version>
+                <version>2.23.1</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>2.6.3</version>
+                <version>2.8.0.rc2</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
@@ -134,15 +134,9 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>javax.mail</groupId>
                 <artifactId>mail</artifactId>
-                <version>1.4.7</version>
+                <version>1.5.0-b01</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

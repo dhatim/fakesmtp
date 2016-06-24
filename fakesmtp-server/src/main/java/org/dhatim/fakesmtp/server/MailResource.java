@@ -3,7 +3,7 @@ package org.dhatim.fakesmtp.server;
 import com.dumbster.smtp.MailMessage;
 import com.dumbster.smtp.SmtpServer;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.ws.rs.GET;
@@ -48,7 +48,7 @@ public class MailResource {
     
     private static Mail fromMailMessage(MailMessage mail) {
         Iterable<String> it = () -> mail.getHeaderNames();
-        HashMap<String, List<String>> hs = new HashMap<>();
+        LinkedHashMap<String, List<String>> hs = new LinkedHashMap<>();
         for (String name : it) {
             hs.put(name, Arrays.asList(mail.getHeaderValues(name)));
         }

@@ -2,19 +2,20 @@ package org.dhatim.fakesmtp.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public final class Mail {
     
-    private final HashMap<String, List<String>> headers;
+    private final Map<String, List<String>> headers;
     private final String body;
     
     @JsonCreator
     public Mail(@JsonProperty("headers") Map<String, List<String>> headers, @JsonProperty("body") String body) {
-        this.headers = new HashMap<>(headers);
+        this.headers = unmodifiable(headers);
         this.body = body;
     }
     
@@ -24,8 +25,13 @@ public final class Mail {
     }
     
     @JsonProperty
-    public HashMap<String, List<String>> getHeaders() {
+    public Map<String, List<String>> getHeaders() {
         return headers;
+    }
+    
+    public String getFirstHeaderValue(String name) {
+        List<String> list = headers.get(name);
+        return (list == null || list.isEmpty()) ? null : list.get(0);
     }
     
     @Override
@@ -43,6 +49,14 @@ public final class Mail {
             return Objects.equals(headers, other.headers) && Objects.equals(body, other.body);
         }
         return false;
+    }
+    
+    private static <K, V> Map<K, List<V>> unmodifiable(Map<K, List<V>> map) {
+        LinkedHashMap<K, List<V>> dest = new LinkedHashMap<>();
+        for (Map.Entry<K, List<V>> entry : map.entrySet()) {
+            dest.put(entry.getKey(), Collections.unmodifiableList(entry.getValue()));
+        }
+        return Collections.unmodifiableMap(dest);
     }
     
 }
