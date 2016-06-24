@@ -31,7 +31,7 @@ public class MailResourceTest {
     private final Mail mail = new Mail(ImmutableMap.of("header1", ImmutableList.of("value1"), "header2", ImmutableList.of("value1", "value2")), "This is a test");
     
     @Before
-    public void setup() {
+    public void setUp() {
         MailMessageImpl message = new MailMessageImpl();
         message.addHeader("header1", "value1");
         message.addHeader("header2", "value1");
