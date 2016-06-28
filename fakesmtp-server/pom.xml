@@ -9,7 +9,6 @@
 
     <artifactId>fakesmtp-server</artifactId>
     <name>fakesmtp-server</name>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
         <dependency>

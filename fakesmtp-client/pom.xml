@@ -10,8 +10,7 @@
     
     <artifactId>fakesmtp-client</artifactId>
     <name>fakesmtp-client</name>
-    <url>http://maven.apache.org</url>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
@@ -20,6 +19,10 @@
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-base</artifactId>
         </dependency>
     </dependencies>
 </project>
