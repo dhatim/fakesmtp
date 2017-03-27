@@ -69,7 +69,7 @@ public class MailResource {
         try {
             return decode(mail);
         } catch (IOException e) {
-            return "";
+            return null;
         }
     }
 
