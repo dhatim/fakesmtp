@@ -22,37 +22,42 @@ public class MailResourceTest {
 
     private static final SmtpServer serverDao = mock(SmtpServer.class);
     private static final DumbsterManager dao = mock(DumbsterManager.class);
-    
+
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new MailResource(dao))
             .build();
-    
-    private final Mail mail = new Mail(ImmutableMap.of("header1", ImmutableList.of("value1"), "header2", ImmutableList.of("value1", "value2")), "This is a test");
-    
+
+    private final Mail mail = new Mail(ImmutableMap.of(
+            "header1", ImmutableList.of("value1"),
+            "header2", ImmutableList.of("value1", "value2"),
+            "Content-Transfer-Encoding", ImmutableList.of("quoted-printable")),
+            "This is a test", "This is a test");
+
     @Before
     public void setUp() {
         MailMessageImpl message = new MailMessageImpl();
         message.addHeader("header1", "value1");
         message.addHeader("header2", "value1");
         message.addHeader("header2", "value2");
+        message.addHeader("Content-Transfer-Encoding", "quoted-printable");
         message.appendBody("This is a test");
-        
+
         when(dao.getServer()).thenReturn(serverDao);
         when(serverDao.getMessages()).thenReturn(new MailMessage[] {message});
     }
-    
+
     @After
     public void tearDown() {
         reset(dao);
         reset(serverDao);
     }
-    
+
     @Test
     public void testGetMessages() {
         assertThat(resources.client().target("/mails").request().get(new GenericType<List<Mail>>() {}))
-                .isEqualTo(Arrays.asList(mail)); 
+                .isEqualTo(Arrays.asList(mail));
         verify(dao).getServer();
     }
-    
+
 }
